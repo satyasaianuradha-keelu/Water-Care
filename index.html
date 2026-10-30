@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Community Service Project | Drinking Water Assessment</title>
+<link rel="preconnect" href="https://unpkg.com"><link rel="preconnect" href="https://tile.openstreetmap.org">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+:root{--navy:#10354a;--teal:#087f8c;--mint:#dff5ee;--sky:#eaf5fb;--ink:#173443;--muted:#627784;--line:#dce8ec;--white:#fff;--bg:#f5f9fa;--orange:#f0a54a;--red:#d95050;--green:#168767;--shadow:0 12px 32px #17344312}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}.hidden{display:none!important}.shell{min-height:100vh}.topbar{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,56px);background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:1000}.brand{display:flex;align-items:center;gap:12px;cursor:pointer}.logo{width:46px;height:46px;border-radius:15px;background:linear-gradient(145deg,#087f8c,#10354a);display:grid;place-items:center;box-shadow:0 6px 14px #087f8c30}.logo svg{width:31px}.brandname{font-weight:850;font-size:20px;letter-spacing:-.6px}.brandname small{display:block;font-size:10px;letter-spacing:1.7px;color:var(--muted);font-weight:700}.topactions{display:flex;gap:10px;align-items:center}.btn{border:0;border-radius:12px;padding:11px 16px;font-weight:750;transition:.18s}.btn:hover{transform:translateY(-1px)}.primary{background:var(--teal);color:#fff}.dark{background:var(--navy);color:#fff}.soft{background:var(--sky);color:var(--navy)}.outline{background:#fff;border:1px solid var(--line);color:var(--ink)}.danger{background:#fff0f0;color:#a72e2e}.small{padding:8px 11px;font-size:13px}.wrap{max-width:1240px;margin:auto;padding:26px clamp(16px,3vw,34px) 60px}.login-screen{min-height:calc(100vh - 76px);display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:center;max-width:1160px;margin:auto;padding:32px}.login-art{background:linear-gradient(145deg,#10354a,#087f8c);border-radius:30px;color:#fff;padding:clamp(28px,5vw,58px);min-height:470px;position:relative;overflow:hidden}.login-art:after{content:"";position:absolute;width:350px;height:350px;border:1px solid #ffffff30;border-radius:50%;right:-90px;bottom:-110px;box-shadow:0 0 0 35px #ffffff09,0 0 0 75px #ffffff07}.eyebrow{font-size:11px;letter-spacing:1.8px;text-transform:uppercase;font-weight:850;color:#83ddd0}.login-art h1{font-size:clamp(34px,4vw,52px);line-height:1.06;letter-spacing:-1.8px;margin:20px 0}.login-art p{color:#d3e7eb;max-width:440px}.art-stats{display:flex;gap:12px;margin-top:42px;flex-wrap:wrap}.art-stat{background:#ffffff16;border:1px solid #ffffff20;border-radius:15px;padding:13px 17px}.art-stat strong{display:block;font-size:22px}.art-stat span{font-size:12px;color:#d3e7eb}.login-card{background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);border-radius:26px;padding:clamp(24px,4vw,42px)}.login-card h2{font-size:28px;letter-spacing:-.7px;margin:0 0 7px}.muted{color:var(--muted)}.role-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:25px 0 20px}.role{border:1.5px solid var(--line);border-radius:17px;padding:19px;text-align:left;background:#fff;color:var(--ink)}.role.active{border-color:var(--teal);background:#edfbf8;box-shadow:inset 0 0 0 1px var(--teal)}.role .emoji{font-size:26px}.role strong{display:block;margin:9px 0 3px}.role span{font-size:12px;color:var(--muted)}.field{display:flex;flex-direction:column;gap:6px;margin:12px 0}.field label{font-size:13px;font-weight:750}.field input,.field select,.field textarea,.searchbox input{border:1px solid #d5e2e7;border-radius:11px;padding:12px 13px;background:#fff;color:var(--ink);width:100%;outline:none}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--teal);box-shadow:0 0 0 3px #087f8c15}.field textarea{min-height:95px;resize:vertical}.wide{width:100%}.demo-note{font-size:12px;color:var(--muted);margin-top:13px}.app{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:calc(100vh - 76px)}.sidebar{background:#fff;border-right:1px solid var(--line);padding:23px 15px;position:sticky;top:76px;height:calc(100vh - 76px);overflow:auto}.side-label{font-size:10px;letter-spacing:1.5px;color:#8799a1;font-weight:850;padding:10px 12px}.navbtn{display:flex;align-items:center;gap:12px;width:100%;padding:12px;border:0;background:transparent;color:#58707d;text-align:left;border-radius:12px;margin:3px 0;font-weight:700}.navbtn .ni{width:25px;text-align:center;font-size:18px}.navbtn.active,.navbtn:hover{background:#e9f7f5;color:var(--teal)}.side-bottom{position:absolute;bottom:20px;left:15px;right:15px;background:#f2f8f9;border-radius:14px;padding:13px;font-size:12px;color:var(--muted)}.main{min-width:0;padding:26px clamp(15px,3vw,34px) 50px}.pagehead{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:22px}.pagehead h1{margin:0;font-size:29px;letter-spacing:-1px}.pagehead p{margin:5px 0 0;color:var(--muted)}.tag{display:inline-flex;align-items:center;gap:6px;border-radius:100px;padding:6px 10px;font-size:12px;font-weight:800;background:#e8f7f0;color:#117452}.dot{width:7px;height:7px;border-radius:50%;background:currentColor}.hero{background:linear-gradient(110deg,#10354a 0%,#0b6674 75%,#138c8a);border-radius:24px;color:#fff;padding:clamp(25px,4vw,42px);display:grid;grid-template-columns:1.4fr .6fr;gap:20px;position:relative;overflow:hidden}.hero h2{font-size:clamp(27px,3vw,39px);line-height:1.12;letter-spacing:-1px;margin:13px 0}.hero p{color:#d5e9ed;max-width:560px}.hero .btn{margin-top:12px}.hero-art{display:flex;align-items:center;justify-content:center;min-height:150px}.water-illustration{width:190px;height:190px;border-radius:50%;background:#ffffff12;border:1px solid #ffffff30;display:grid;place-items:center}.water-illustration svg{width:120px}.statgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0 24px}.statcard,.card{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 5px 16px #17344306}.statcard{padding:18px}.statcard .label{color:var(--muted);font-size:12px;font-weight:700}.statcard strong{font-size:27px;display:block;letter-spacing:-.7px;margin:4px 0}.statcard small{color:var(--muted);font-size:11px}.staticon{float:right;font-size:22px;background:var(--sky);border-radius:11px;padding:8px}.sectionrow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:26px 0 13px}.sectionrow h2{font-size:19px;margin:0}.sectionrow p{margin:2px 0 0;font-size:13px;color:var(--muted)}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:17px}.card{padding:20px;min-width:0}.card h3{margin:0 0 5px;font-size:16px}.card p{color:var(--muted);margin:0;font-size:13px}.status-list{display:grid;gap:0;margin-top:13px}.status-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px 0;border-bottom:1px solid #edf2f4}.status-row:last-child{border-bottom:0}.place-name{font-weight:750}.place-sub{font-size:12px;color:var(--muted)}.pill{display:inline-block;border-radius:99px;padding:5px 9px;font-size:11px;font-weight:850;white-space:nowrap}.available{background:#e4f7ee;color:#137552}.unavailable{background:#fff0ef;color:#b63838}.limited{background:#fff4df;color:#99600a}.map-tools{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:12px}.searchbox{flex:1;min-width:200px;display:flex;gap:7px}.searchbox input{min-width:0}.maplayout{display:grid;grid-template-columns:minmax(0,1fr) 285px;gap:14px}.mapbox{height:440px;border-radius:17px;overflow:hidden;border:1px solid var(--line);z-index:1}.map-side{padding:17px}.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-bottom:12px}.legend span{display:flex;align-items:center;gap:6px}.legend i{width:10px;height:10px;border-radius:50%;display:inline-block}.place-list{display:grid;gap:8px;margin-top:12px}.placeitem{padding:11px;border:1px solid var(--line);border-radius:12px;display:flex;justify-content:space-between;gap:8px;align-items:center;cursor:pointer}.placeitem:hover{border-color:var(--teal);background:#f4fbfa}.filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:16px}.filters select{padding:10px 12px;border:1px solid var(--line);border-radius:11px;background:#fff;color:var(--ink)}.facility-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.facility{border:1px solid var(--line);border-radius:16px;padding:17px;background:#fff}.facility .ficon{font-size:24px}.facility h3{margin:9px 0 4px;font-size:15px}.facility p{font-size:12px;color:var(--muted);margin:0 0 12px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}.span2{grid-column:span 2}.report-number{border:1px dashed #72bca8;background:#effbf6;padding:18px;border-radius:15px;margin-top:16px}.report-number strong{font-size:22px;color:#117452}.tablewrap{overflow:auto}.data-table{width:100%;border-collapse:collapse;font-size:13px}.data-table th{text-align:left;color:var(--muted);font-size:11px;letter-spacing:.5px;text-transform:uppercase;background:#f8fbfc;padding:12px}.data-table td{padding:13px 12px;border-top:1px solid #edf2f4;vertical-align:top}.data-table select{padding:7px;border:1px solid var(--line);border-radius:8px;max-width:145px}.voicebar{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#eef8fb;border:1px solid #d9edf3;border-radius:15px;margin-bottom:16px}.mic{width:43px;height:43px;border-radius:14px;background:var(--teal);color:#fff;border:0;font-size:20px}.voicebar strong{display:block}.voicebar p{margin:2px 0 0;color:var(--muted);font-size:12px}.awareness-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.awareness{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden}.awareness img{width:100%;height:155px;object-fit:cover;display:block}.awareness div{padding:16px}.awareness h3{margin:0 0 6px;font-size:16px}.awareness p{margin:0;color:var(--muted);font-size:13px}.collegehero{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center}.collegehero img{width:100%;height:285px;object-fit:cover;border-radius:18px}.collegehero h2{font-size:27px;line-height:1.15;margin:0 0 12px}.collegefacts{display:flex;flex-wrap:wrap;gap:9px;margin-top:15px}.collegefacts span{background:#eaf5fb;border-radius:10px;padding:8px 11px;font-size:12px;font-weight:750}.cspnav{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}.cspnav button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 12px;font-weight:700;font-size:12px}.cspnav button.active{background:var(--navy);color:#fff}.cspsection{padding:18px 0;border-bottom:1px solid #edf2f4}.cspsection h3{margin:0 0 7px}.cspsection p,.cspsection li{color:#526a77;font-size:14px}.cspsection ul{padding-left:20px}.footnote{font-size:12px;color:var(--muted);margin-top:15px}.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#10354a;color:#fff;padding:12px 18px;border-radius:12px;box-shadow:var(--shadow);z-index:2000;max-width:90vw}.empty{padding:28px;text-align:center;color:var(--muted)}.mobile-menu{display:none}
+@media(max-width:950px){.app{grid-template-columns:76px minmax(0,1fr)}.sidebar{padding:17px 8px}.side-label,.navbtn .nt,.side-bottom{display:none}.navbtn{justify-content:center;padding:13px 6px}.navbtn .ni{font-size:20px}.statgrid{grid-template-columns:repeat(2,1fr)}.maplayout{grid-template-columns:1fr}.map-side{order:2}.facility-grid,.awareness-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:650px){.topbar{height:66px;padding:0 13px}.brandname{font-size:17px}.topactions .btn{padding:8px 10px;font-size:12px}.login-screen{grid-template-columns:1fr;padding:18px}.login-art{min-height:280px;padding:25px}.login-art h1{font-size:34px}.art-stats{margin-top:20px}.login-art .water-illustration{display:none}.app{display:block}.sidebar{position:fixed;z-index:1100;top:auto;bottom:0;left:0;right:0;height:67px;border-right:0;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:5px 3px;background:#fff}.navbtn{width:auto;min-width:40px;flex-direction:column;gap:0;padding:6px 8px;margin:0}.navbtn .nt{display:block;font-size:9px;white-space:nowrap}.navbtn .ni{font-size:17px}.main{padding:20px 13px 90px}.pagehead h1{font-size:25px}.pagehead{align-items:flex-start}.hero{grid-template-columns:1fr}.hero-art{display:none}.statgrid{gap:9px}.statcard{padding:13px}.statcard strong{font-size:23px}.grid2,.collegehero,.formgrid{grid-template-columns:1fr}.span2{grid-column:auto}.facility-grid,.awareness-grid{grid-template-columns:1fr}.mapbox{height:360px}.role-grid{gap:8px}.role{padding:13px}.topactions #langLabel{display:none}.collegehero img{height:220px}}
+  :root{--navy:#123b68;--teal:#1f67b2;--mint:#e7f1ff;--sky:#edf4ff;--ink:#193650;--line:#d8e4f0}
+  .topbar{background:#15569a;color:#fff;border-bottom-color:#10477f}
+  .brandname small{color:#d6e8ff}
+  .topactions .outline,.topactions .soft{background:#ffffff18;color:#fff;border-color:#ffffff45}
+  .topactions .btn:hover{background:#ffffff2b}
+  .logo{background:linear-gradient(145deg,#3487df,#103d72);box-shadow:0 6px 14px #0e3c7040}
+  .login-art{background:linear-gradient(145deg,#123b68,#1f67b2)}
+  .hero{background:linear-gradient(110deg,#123b68 0%,#18589a 72%,#2d7bc5)}
+  .navbtn.active,.navbtn:hover{background:#e5f0ff;color:#15569a;box-shadow:inset 3px 0 #2878c8}
+  .sidebar{background:#f8fbff}
+  .side-bottom{background:#eaf2fc}
+  .role.active{border-color:#1f67b2;background:#eff6ff;box-shadow:inset 0 0 0 1px #1f67b2}
+  .field input:focus,.field textarea:focus,.field select:focus{border-color:#1f67b2;box-shadow:0 0 0 3px #1f67b218}
+  .placeitem:hover{border-color:#1f67b2;background:#f2f7ff}
+  .csp-overview{margin-bottom:18px;padding:0;overflow:hidden}
+  .csp-overview-head{padding:22px 22px 8px}
+  .csp-overview-head h2{margin:5px 0;font-size:21px}
+  .csp-overview-head p{margin:0;color:var(--muted);font-size:13px}
+  .csp-image-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;padding:12px 22px 22px}
+  .csp-image-card{overflow:hidden;border:1px solid var(--line);border-radius:15px;background:#fff}
+  .csp-image-card img{display:block;width:100%;height:145px;object-fit:cover;background:#edf4ff}
+  .csp-image-card div{padding:12px}
+  .csp-image-card h3{margin:0 0 5px;font-size:14px}
+  .csp-image-card p{margin:0;color:var(--muted);font-size:12px}
+  .csp-note{margin:0 22px 20px;padding:12px 14px;border-radius:12px;background:#eff6ff;color:#3c5a78;font-size:12px}
+  .skip-link{position:absolute;left:12px;top:-60px;z-index:2000;padding:10px 14px;background:#fff;color:#123b68;border:2px solid #123b68;border-radius:8px;font-weight:750}
+  .skip-link:focus{top:12px}
+  :focus-visible{outline:3px solid #f0a54a;outline-offset:3px}
+  .demo-banner{display:flex;align-items:flex-start;gap:10px;margin:0 0 18px;padding:13px 15px;border:1px solid #bed2eb;border-left:5px solid #1f67b2;border-radius:12px;background:#edf4ff;color:#193650;font-size:13px}
+  .demo-banner strong{display:block;color:#123b68}
+  .demo-banner p{margin:2px 0 0}
+  .demo-banner-icon{font-size:20px;line-height:1.2}
+  .auth-choice{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0 12px}
+  .auth-choice .btn{min-height:50px}
+  .auth-panel{margin-top:18px}
+  .auth-panel h3{margin:0 0 5px}
+  .auth-message{min-height:20px;margin:8px 0;color:#a72e2e;font-size:13px;font-weight:650}
+  .auth-demo-note{margin-top:16px;padding:12px;border-radius:12px;background:#fff5e8;color:#77500c;font-size:12px}
+  .auth-demo-note strong{display:block}
+  .college-description{margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}
+  .college-description h3{margin:0 0 12px;color:var(--navy);font-size:21px}
+  .college-description p{margin:0 0 12px;color:var(--muted);line-height:1.75}
+  .college-description p:last-child{margin-bottom:0}
+  @media(max-width:650px){.auth-choice{grid-template-columns:1fr}.college-description{margin-top:16px;padding-top:16px}.college-description h3{font-size:18px}}
+  @media(max-width:650px){.topbar{background:#15569a}.sidebar{background:#fff}.csp-image-grid{grid-template-columns:1fr;padding:10px 16px 16px}.csp-image-card img{height:180px}.csp-overview-head{padding:18px 16px 8px}.csp-note{margin:0 16px 16px}}
+</style>
+<style>
+  *,*::before,*::after{font-family:"Times New Roman",Times,serif!important}
+  .landing-page{min-height:100vh;display:flex;flex-direction:column;background:#fff;color:#161616;font-family:Georgia,"Times New Roman",serif}
+  .landing-masthead{width:min(100%,1320px);margin:0 auto;padding:24px clamp(20px,4vw,48px) 18px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .college-logo-image{display:block;width:min(100%,1032px);height:auto;min-width:0;flex:1 1 auto}
+  .apsche-logo-image{display:block;width:clamp(74px,12vw,160px);height:auto;flex:0 0 auto}
+  .landing-rule{width:min(calc(100% - 40px),1240px);height:3px;margin:0 auto;background:#df801a}
+  .landing-content{width:min(100%,1280px);margin:0 auto;padding:25px clamp(20px,3vw,42px) 26px;text-align:center}
+  .landing-department{margin:0;color:#0b2e70;font-size:clamp(25px,3.2vw,38px);line-height:1.16;font-weight:700}
+  .landing-csp-title{margin:17px 0 0;font-size:clamp(25px,3.3vw,36px);line-height:1.2;color:#151515}
+  .landing-project-title{max-width:1050px;margin:17px auto 0;color:#2d75bd;font-size:clamp(20px,2.7vw,30px);line-height:1.3}
+  .landing-village{display:inline-block;margin-top:13px;padding:5px 13px;border:1px solid #e4edf5;border-radius:999px;background:#f7fbff;color:#315b80;font:600 13px/1.3 Arial,sans-serif;letter-spacing:.3px}
+  .landing-details{display:grid;grid-template-columns:1fr 1fr;gap:0;max-width:910px;margin:24px auto 0;text-align:left}
+  .landing-detail{padding:0 32px}
+  .landing-detail+.landing-detail{border-left:1px solid #dce5ed}
+  .landing-detail h3{margin:0 0 10px;color:#142f57;font-size:21px}
+  .landing-team{display:grid;gap:6px}
+  .landing-member{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 18px;font-size:17px;line-height:1.35}
+  .landing-member span:last-child{white-space:nowrap;color:#333}
+  .landing-mentor{font-size:17px;line-height:1.5}
+  .landing-mentor strong{display:block}
+  .landing-mentor span{display:block}
+  .landing-enter-wrap{margin-top:auto;padding:20px 20px 30px;text-align:center}
+  .landing-enter{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:13px 25px;border:0;border-radius:8px;background:#175eaa;color:#fff;text-decoration:none;font:700 16px/1.2 Arial,sans-serif;box-shadow:0 6px 16px #175eaa30;transition:background-color .2s ease,box-shadow .2s ease,transform .2s ease}
+  .landing-enter:hover{background:#104b8b;box-shadow:0 9px 22px #175eaa40;transform:translateY(-2px)}
+  .landing-enter:focus-visible{outline:3px solid #df801a;outline-offset:4px}
+  .landing-enter-arrow{font-size:20px;transition:transform .2s ease}
+  .landing-enter:hover .landing-enter-arrow{transform:translateX(4px)}
+  .landing-footer{padding:0 20px 18px;color:#66717c;text-align:center;font:12px/1.5 Arial,sans-serif}
+  @media(max-width:700px){
+    .landing-masthead{align-items:center;flex-direction:column;gap:12px;padding:18px 14px 14px}
+    .college-logo-image{width:min(100%,520px)}
+    .apsche-logo-image{width:clamp(72px,16vw,100px);align-self:flex-end}
+    .landing-content{padding-top:24px}
+    .landing-details{grid-template-columns:1fr;gap:19px;max-width:520px;margin-top:23px}
+    .landing-detail{padding:0 8px}
+    .landing-detail+.landing-detail{border-top:1px solid #dce5ed;border-left:0;padding-top:17px}
+  }
+  @media(max-width:430px){
+    .landing-masthead{gap:10px;padding-right:10px;padding-left:10px}
+    .apsche-logo-image{width:72px}
+    .landing-member{grid-template-columns:minmax(0,1fr);gap:0;font-size:16px}
+    .landing-member span:last-child{font-size:14px}
+    .landing-enter-wrap{padding-bottom:22px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .landing-enter,.landing-enter-arrow{transition:none}
+  }
+</style>
+</head>
+<body>
+<main id="landingPage" class="landing-page">
+  <header class="landing-masthead" aria-label="Institutional affiliations">
+    <img class="college-logo-image" src="assets/ramachandra-college-logo.png" alt="Ramachandra College of Engineering — Autonomous">
+    <img class="apsche-logo-image" src="assets/apsche-logo.png" alt="Andhra Pradesh State Council of Higher Education">
+  </header>
+  <div class="landing-rule" aria-hidden="true"></div>
+  <section class="landing-content" aria-labelledby="landingDepartment">
+    <h1 class="landing-department" id="landingDepartment">Department of Computer Science &amp; Engineering</h1>
+    <h2 class="landing-csp-title">Community Service Project (CSP)</h2>
+    <p class="landing-project-title">Assessment of Drinking Water Availability and Infrastructure Facilities</p>
+    <span class="landing-village">Village: Jalipudi</span>
+    <div class="landing-details">
+      <section class="landing-detail" aria-labelledby="landingTeamHeading">
+        <h3 id="landingTeamHeading">Team Members</h3>
+        <div class="landing-team">
+          <div class="landing-member"><span>K. Satya Sai Anuradha</span><span>24ME1A0588</span></div>
+          <div class="landing-member"><span>K. Sudheer</span><span>24ME1A0589</span></div>
+          <div class="landing-member"><span>B. Ishwarya</span><span>25ME5A0507</span></div>
+        </div>
+      </section>
+      <section class="landing-detail" aria-labelledby="landingMentorHeading">
+        <h3 id="landingMentorHeading">Mentor</h3>
+        <div class="landing-mentor">
+          <strong>Mr. Y. Nagendra Kumar</strong>
+          <span>Associate Professor</span>
+          <span>Academic Year: 2025–2026</span>
+        </div>
+      </section>
+    </div>
+  </section>
+  <div class="landing-enter-wrap">
+    <button class="landing-enter" type="button" onclick="enterProject()">Enter Project <span class="landing-enter-arrow" aria-hidden="true">→</span></button>
+  </div>
+  <footer class="landing-footer">Ramachandra College of Engineering (Autonomous) · Community Service Project · 2025–2026</footer>
+</main>
+<div id="projectApp" class="hidden">
+<a class="skip-link" href="#mainContent">Skip to main content</a>
+<header class="topbar">
+  <div class="brand" onclick="showApp('home')">
+    <div class="logo"><svg viewBox="0 0 64 64" fill="none" aria-label="NeeruSetu logo"><path d="M32 5C25 17 13 28 13 40a19 19 0 0 0 38 0C51 28 39 17 32 5Z" fill="#fff"/><path d="M20 40c3 6 8 9 14 8" stroke="#087f8c" stroke-width="4" stroke-linecap="round"/><path d="M32 22v19m-8-9 8 9 8-9" stroke="#087f8c" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="brandname">Water Care<small>WATER • COMMUNITY • CARE</small></div>
+  </div>
+  <div class="topactions"><button class="btn outline small" onclick="toggleLanguage()"><span>🌐</span> <span id="langLabel">తెలుగు</span></button><button class="btn soft small" onclick="logout()" id="logoutBtn" style="display:none">↪ <span data-i18n="logout">Log out</span></button></div>
+</header>
+<section id="loginScreen" class="login-screen">
+  <div class="login-art">
+    <div class="eyebrow">COMMUNITY SERVICE PROJECT · JALIPUDI</div>
+    <h1 data-i18n="loginHero">Every drop matters.<br>Every community counts.</h1>
+    <p data-i18n="loginDesc">Explore water availability, locate community facilities, and help report problems so they can be followed up.</p>
+    <div class="art-stats"><div class="art-stat"><strong>01</strong><span data-i18n="surveyArea">Survey area · Jalipudi</span></div><div class="art-stat"><strong>24/7</strong><span data-i18n="communityAccess">Community access</span></div></div>
+    <div class="water-illustration" style="position:absolute;right:45px;bottom:42px"><svg viewBox="0 0 120 120" fill="none"><path d="M60 8C48 29 25 50 25 72a35 35 0 0 0 70 0C95 50 72 29 60 8Z" fill="#fff"/><path d="M40 72c5 10 13 15 23 13" stroke="#087f8c" stroke-width="6" stroke-linecap="round"/><path d="M60 45v32m-13-13 13 13 13-13" stroke="#087f8c" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  </div>
+  <div class="login-card">
+    <div class="eyebrow" style="color:var(--teal)" data-i18n="welcome">WELCOME TO WATER CARE</div>
+    <h2 id="authHeading">Welcome</h2>
+    <p id="authIntro" class="muted">Create a demo account or sign in with an account you have already created.</p>
+    <div id="authChoice" class="auth-choice">
+      <button class="btn primary" type="button" onclick="setAuthMode('signup')">Create an account</button>
+      <button class="btn soft" type="button" onclick="setAuthMode('signin')">Sign in</button>
+    </div>
+    <div id="authForm" class="auth-panel hidden">
+      <h3 id="authFormHeading">Sign in</h3>
+      <p class="muted" id="authFormHint">Enter your username and password.</p>
+      <div class="field"><label for="loginName">Username</label><input id="loginName" autocomplete="username" minlength="3" maxlength="32" placeholder="Choose your username" onkeydown="if(event.key==='Enter')login()"></div>
+      <div class="field"><label for="loginPass">Password</label><input id="loginPass" type="password" autocomplete="current-password" minlength="8" maxlength="128" placeholder="Enter your password" onkeydown="if(event.key==='Enter')login()"></div>
+      <div class="field hidden" id="confirmPasswordField"><label for="confirmPassword">Confirm password</label><input id="confirmPassword" type="password" autocomplete="new-password" minlength="8" maxlength="128" placeholder="Enter your password again" onkeydown="if(event.key==='Enter')login()"></div>
+      <p id="authMessage" class="auth-message" role="alert" aria-live="polite"></p>
+      <button id="authSubmit" class="btn primary wide" type="button" onclick="login()">Sign in</button>
+      <button class="btn outline wide" style="margin-top:9px" type="button" onclick="returnToAuthChoice()">Back</button>
+    </div>
+    <div id="roleSelect" class="auth-panel hidden">
+      <h3>Choose your access</h3>
+      <p class="muted">Select the workspace you want to open.</p>
+      <div class="role-grid">
+        <button class="role active" id="userRole" type="button" onclick="chooseRole('user')"><div class="emoji">🏡</div><strong>Community user</strong><span>Check status, find facilities, report issues</span></button>
+        <button class="role" id="adminRole" type="button" onclick="chooseRole('admin')"><div class="emoji">🛡️</div><strong>Administrator · demo</strong><span>Demo workspace only; not protected by a real admin account</span></button>
+      </div>
+      <button class="btn primary wide" type="button" onclick="continueToApp()">Continue to portal →</button>
+      <button class="btn outline wide" style="margin-top:9px" type="button" onclick="returnToAuthChoice()">Sign out</button>
+    </div>
+    <div id="authDemoNote" class="auth-demo-note"><strong>Demo account notice</strong>Accounts are saved in this browser only. This static prototype has no secure server authentication. The Administrator option is a visual demo and must not be used to protect real data.</div>
+  </div>
+</section>
+<div id="app" class="app hidden">
+  <aside class="sidebar">
+    <div class="side-label" data-i18n="workspace">WORKSPACE</div>
+    <button class="navbtn active" data-page="home" onclick="showApp('home')"><span class="ni">⌂</span><span class="nt" data-i18n="home">Home</span></button>
+    <button class="navbtn" data-page="map" onclick="showApp('map')"><span class="ni">⌖</span><span class="nt" data-i18n="waterMap">Water map</span></button>
+    <button class="navbtn" data-page="status" onclick="showApp('status')"><span class="ni">◉</span><span class="nt" data-i18n="waterStatus">Water status</span></button>
+    <button class="navbtn" data-page="facilities" onclick="showApp('facilities')"><span class="ni">▦</span><span class="nt" data-i18n="facilities">Facilities</span></button>
+    <button class="navbtn" data-page="report" onclick="showApp('report')"><span class="ni">＋</span><span class="nt" data-i18n="reportIssue">Report issue</span></button>
+    <button class="navbtn" data-page="track" onclick="showApp('track')"><span class="ni">⌕</span><span class="nt" data-i18n="trackReport">Track report</span></button>
+    <div class="side-label" style="margin-top:18px" data-i18n="learn">LEARN & PROJECT</div>
+    <button class="navbtn" data-page="csp" onclick="showApp('csp')"><span class="ni">▤</span><span class="nt" data-i18n="cspSurvey">CSP survey</span></button>
+    <button class="navbtn" data-page="college" onclick="showApp('college')"><span class="ni">⌂</span><span class="nt" data-i18n="aboutCollege">About college</span></button>
+    <button class="navbtn" data-page="awareness" onclick="showApp('awareness')"><span class="ni">✧</span><span class="nt" data-i18n="awareness">Water awareness</span></button>
+    <button class="navbtn hidden" data-page="admin" id="adminNav" onclick="showApp('admin')"><span class="ni">⚙</span><span class="nt" data-i18n="adminPanel">Admin panel</span></button>
+    <div class="side-bottom">💧 <strong>Water Care</strong><br><span data-i18n="sideCaption">Local information. Shared responsibility.</span></div>
+  </aside>
+  <main class="main" id="mainContent" tabindex="-1"></main>
+</div>
+<div id="toast" class="toast hidden" role="status"></div>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const T={
+en:{logout:"Log out",loginHero:"Every drop matters.<br>Every community counts.",loginDesc:"Explore water availability, locate community facilities, and help report problems so they can be followed up.",surveyArea:"Survey area · Jalipudi",communityAccess:"Community access",welcome:"WELCOME TO NEERUSETU",chooseAccess:"Choose your access",chooseDesc:"Select how you would like to use the water assessment portal.",communityUser:"Community user",userDesc:"Check status, find facilities, report issues",admin:"Administrator",adminDesc:"Review reports and update status",nameOrId:"Name / demo ID",password:"Password",continueBtn:"Continue to portal →",demoNote:"Prototype access: use any name and password. Admin access is a visual demo, not a secure authentication system.",workspace:"WORKSPACE",home:"Home",waterMap:"Water map",waterStatus:"Water status",facilities:"Facilities",reportIssue:"Report issue",trackReport:"Track report",learn:"LEARN & PROJECT",cspSurvey:"CSP survey",aboutCollege:"About college",awareness:"Water awareness",adminPanel:"Admin panel",sideCaption:"Local information. Shared responsibility.",hello:"Hello",homeSub:"A community-first view of drinking water availability and local infrastructure.",surveySnapshot:"SURVEY SNAPSHOT",points:"Survey locations",available:"Available",limited:"Limited supply",unavailable:"Unavailable",sampleNote:"Sample entries for prototype review · replace with verified survey findings before publishing.",exploreMap:"Explore water map",reportProblem:"Report a water problem",recentStatus:"Water status by location",viewAll:"View all",recentReports:"Recent reports",communityUpdates:"Example survey entries",homeHero:"Know your water. Strengthen your community.",heroDesc:"Find reported water points, check local facilities, and share an issue with a clear follow-up reference.",waterMapTitle:"Water availability map",waterMapDesc:"Search for a place to move the map there. Select a water point to see its status and request directions.",searchPlace:"Search a place or area…",search:"Search place",useLocation:"Use my location",directions:"Get directions",filter:"Filter",allStatuses:"All statuses",onlyAvailable:"Available",onlyLimited:"Limited supply",onlyUnavailable:"Unavailable",mapTip:"Select a marker to see details. Directions use your current location when available; otherwise choose a start point.",selectedPoint:"Selected water point",chooseMarker:"Choose a marker on the map to view details.",facilityType:"Facility type",allTypes:"All facility types",working:"Working",needsAttention:"Needs attention",facilityExamples:"Facilities in the survey area",facilityDesc:"Example infrastructure records for the prototype. Confirm details during the field survey.",publicTap:"Public tap",borewell:"Borewell",storageTank:"Storage tank",pipeline:"Pipeline",waterKiosk:"Community water point",drainage:"Drainage nearby",reportTitle:"Report a water issue",reportDesc:"Share what happened so the issue can be reviewed and tracked.",voiceTitle:"Voice assistance",voiceDesc:"Use your device microphone to dictate a report. Telugu speech recognition depends on your browser.",startVoice:"🎙 Speak to fill description",category:"Problem category",selectCategory:"Choose a category",noSupply:"No water supply",lowSupply:"Low water pressure / limited supply",quality:"Water quality concern",leakage:"Pipeline leakage",tapDamage:"Damaged public tap",other:"Other",location:"Location / landmark",describe:"Describe the issue",yourName:"Your name (optional)",contact:"Contact number (optional)",submitReport:"Submit report",trackTitle:"Track a report",trackDesc:"Enter the reference number shown after submission.",reportNumber:"Report reference number",trackNow:"Track status",adminTitle:"Admin dashboard",adminDesc:"Review community reports and update status or water availability.",allReports:"Community reports",reportStatus:"Report status",waterStatusLabel:"Water point status",save:"Save update",open:"Open",inReview:"Under review",resolved:"Resolved",closed:"Closed",statusUpdated:"Status updated in this demo.",cspTitle:"Community Service Project survey",cspDesc:"Assessment of Drinking Water Availability and Infrastructure Facilities",studyArea:"Study area",background:"Background",problem:"Problem statement",objectives:"Objectives",methodology:"Survey methodology",findings:"Key findings",recommendations:"Recommendations",social:"Engineering social responsibility",cspStudy:"The study focuses on Jalipudi village, Eluru district, Andhra Pradesh. The field survey examines household access, nearby public water points, supply timing, and the condition of visible water infrastructure.",cspBackground:"Safe and dependable drinking water supports health, education, household routines, and community wellbeing. Local availability can vary by street, source, season, and supply schedule, so household-level observations help identify gaps that broad summaries may miss.",cspProblem:"Residents may experience irregular supply, limited access to public points, damaged infrastructure, or concerns about water quality. The project documents reported experiences and observed conditions; it does not claim laboratory verification of water safety.",cspObjectives:"• Understand household drinking-water sources and reported supply patterns.<br>• Locate public taps, pipelines, borewells and storage facilities.<br>• Record accessibility challenges and concerns shared by residents.<br>• Organise findings into practical recommendations for community follow-up.",cspMethod:"1. Define the study area and prepare a household questionnaire.<br>2. Explain the project purpose and request voluntary participation.<br>3. Communicate in Telugu where preferred and record responses respectfully.<br>4. Observe visible infrastructure and note location, condition and reported supply timing.<br>5. Review responses, group recurring issues, and validate entries before publishing.",cspFindings:"Illustrative themes to verify against the completed survey: supply timing may differ across localities; residents may rely on a mix of public taps, borewells and household storage; infrastructure maintenance and water-quality concerns should be documented with location-specific evidence.",cspRecommendations:"• Maintain a location-wise record of supply timing and interruptions.<br>• Prioritise reported leaks and damaged public taps for inspection.<br>• Encourage residents to report changes through a clear reference number.<br>• Refer suspected water-quality issues to the relevant local authority for appropriate testing.<br>• Update public status only after a field check or authorised confirmation.",cspSocial:"Engineering responsibility includes designing accessible information, protecting residents’ privacy, representing survey results honestly, avoiding unsupported claims about water safety, and making the system usable for older people and people with limited literacy. The website is a support tool—not a replacement for official water testing or local authority action.",aboutRce:"Ramachandra College of Engineering",collegeText:"Ramachandra College of Engineering is located at Vatluru, Eluru, Andhra Pradesh. The institution describes its focus as engineering education, practical learning and student development. This Community Service Project connects technical learning with a local community concern through observation, respectful engagement and evidence-based recommendations.",officialSite:"Visit official college website ↗",awarenessTitle:"Small habits. Safer water. Stronger communities.",awarenessDesc:"Practical water awareness messages for households and community spaces.",safeStorage:"Store water safely",safeStorageText:"Use a clean, covered container. Avoid dipping hands or unclean cups into stored drinking water.",reportLeak:"Report leaks early",reportLeakText:"A leaking pipe or broken tap can waste water and affect nearby supply. Share the location so it can be checked.",qualityCheck:"Take quality concerns seriously",qualityText:"Cloudiness or unusual smell should be reported. Appearance alone cannot confirm that water is safe; request proper testing.",saveWater:"Use water thoughtfully",saveText:"Close taps fully, repair leaks, and reuse suitable non-drinking water where safe and appropriate.",community:"Work together",communityText:"Share verified updates, keep water points clean, and help neighbours understand where to report problems.",verify:"Verify before sharing",verifyText:"Check the date and source of an availability update before passing it on to others.",noReports:"No reports match this reference.",submitted:"Report submitted successfully in this prototype.",required:"Please complete the required fields.",directionsAsk:"Would you like directions from your current location to this water point?",noLocation:"Your location is not available. Allow location access or search for a start point.",routeReady:"Route shown. Follow the map route and check local conditions.",searchFail:"Place not found. Try a nearby town, landmark, or village name.",mapNeedInternet:"The interactive map requires an internet connection.",status:"Status",source:"Source",updated:"Last checked",sample:"Example entry",currentLocation:"Your location",fromHere:"Route from your location",surveyTag:"CSP FIELD STUDY",adminOnly:"This section is available in administrator demo mode."},
+te:{logout:"లాగ్ అవుట్",loginHero:"ప్రతి నీటి చుక్క ముఖ్యం.<br>ప్రతి సమాజం ముఖ్యం.",loginDesc:"నీటి లభ్యతను తెలుసుకోండి, స్థానిక సదుపాయాలను కనుగొనండి, సమస్యలను నివేదించండి.",surveyArea:"సర్వే ప్రాంతం · జాలిపూడి",communityAccess:"సమాజ సేవలు",welcome:"నీరుసేతుకు స్వాగతం",chooseAccess:"మీ ప్రవేశాన్ని ఎంచుకోండి",chooseDesc:"నీటి అంచనా పోర్టల్‌ను ఎలా ఉపయోగించాలనుకుంటున్నారో ఎంచుకోండి.",communityUser:"సాధారణ వినియోగదారు",userDesc:"స్థితి చూడండి, సదుపాయాలు కనుగొనండి, సమస్యలు నివేదించండి",admin:"నిర్వాహకుడు",adminDesc:"నివేదికలను పరిశీలించి స్థితిని నవీకరించండి",nameOrId:"పేరు / డెమో ID",password:"పాస్‌వర్డ్",continueBtn:"పోర్టల్‌కు వెళ్లండి →",demoNote:"ప్రోటోటైప్: ఏ పేరైనా, పాస్‌వర్డ్ అయినా ఉపయోగించవచ్చు. ఇది భద్రత కలిగిన నిజమైన లాగిన్ వ్యవస్థ కాదు.",workspace:"పని విభాగం",home:"హోమ్",waterMap:"నీటి మ్యాప్",waterStatus:"నీటి స్థితి",facilities:"సదుపాయాలు",reportIssue:"సమస్య నివేదించండి",trackReport:"నివేదికను ట్రాక్ చేయండి",learn:"ప్రాజెక్ట్ & అవగాహన",cspSurvey:"CSP సర్వే",aboutCollege:"కళాశాల గురించి",awareness:"నీటి అవగాహన",adminPanel:"అడ్మిన్ ప్యానెల్",sideCaption:"స్థానిక సమాచారం. అందరి బాధ్యత.",hello:"నమస్కారం",homeSub:"తాగునీటి లభ్యత మరియు స్థానిక మౌలిక సదుపాయాల సమాచారం.",surveySnapshot:"సర్వే సంగ్రహం",points:"సర్వే ప్రాంతాలు",available:"అందుబాటులో ఉంది",limited:"పరిమిత సరఫరా",unavailable:"అందుబాటులో లేదు",sampleNote:"ప్రోటోటైప్ కోసం ఉదాహరణ నమోదులు · ప్రచురించే ముందు ధృవీకరించిన సర్వే వివరాలతో మార్చండి.",exploreMap:"నీటి మ్యాప్ చూడండి",reportProblem:"నీటి సమస్యను నివేదించండి",recentStatus:"ప్రాంతాల వారీగా నీటి స్థితి",viewAll:"అన్నీ చూడండి",recentReports:"ఇటీవలి నివేదికలు",communityUpdates:"ఉదాహరణ సర్వే నమోదులు",homeHero:"నీటి స్థితిని తెలుసుకోండి. సమాజాన్ని బలోపేతం చేయండి.",heroDesc:"నీటి పాయింట్లను కనుగొనండి, స్థానిక సదుపాయాలను చూడండి, సమస్యను నివేదించండి.",waterMapTitle:"నీటి లభ్యత మ్యాప్",waterMapDesc:"ప్రాంతం కోసం వెతికితే మ్యాప్ అక్కడికి వెళ్తుంది. పాయింట్‌ను ఎంచుకుని స్థితి, దిశలను చూడండి.",searchPlace:"ప్రాంతం లేదా స్థలం వెతకండి…",search:"స్థలం వెతకండి",useLocation:"నా ప్రస్తుత స్థానం",directions:"దిశలు పొందండి",filter:"ఫిల్టర్",allStatuses:"అన్ని స్థితులు",onlyAvailable:"అందుబాటులో ఉంది",onlyLimited:"పరిమిత సరఫరా",onlyUnavailable:"అందుబాటులో లేదు",mapTip:"వివరాల కోసం మ్యాప్‌లోని గుర్తును ఎంచుకోండి. సాధ్యమైతే మీ ప్రస్తుత స్థానం నుంచి దిశలు చూపబడతాయి.",selectedPoint:"ఎంచుకున్న నీటి పాయింట్",chooseMarker:"వివరాల కోసం మ్యాప్‌లో ఒక గుర్తును ఎంచుకోండి.",facilityType:"సదుపాయం రకం",allTypes:"అన్ని సదుపాయాలు",working:"పనిచేస్తోంది",needsAttention:"పరిశీలన అవసరం",facilityExamples:"సర్వే ప్రాంతంలోని సదుపాయాలు",facilityDesc:"ప్రోటోటైప్ కోసం ఉదాహరణ నమోదులు. ఫీల్డ్ సర్వేలో వివరాలను నిర్ధారించండి.",publicTap:"ప్రజా కుళాయి",borewell:"బోరుబావి",storageTank:"నీటి ట్యాంక్",pipeline:"పైప్‌లైన్",waterKiosk:"సముదాయ నీటి కేంద్రం",drainage:"సమీప డ్రైనేజీ",reportTitle:"నీటి సమస్యను నివేదించండి",reportDesc:"సమస్యను సమీక్షించి ట్రాక్ చేయడానికి వివరాలను పంపండి.",voiceTitle:"వాయిస్ సహాయం",voiceDesc:"మైక్రోఫోన్‌తో వివరాలను చెప్పవచ్చు. తెలుగు గుర్తింపు మీ బ్రౌజర్‌పై ఆధారపడి ఉంటుంది.",startVoice:"🎙 వివరాలు చెప్పండి",category:"సమస్య వర్గం",selectCategory:"వర్గాన్ని ఎంచుకోండి",noSupply:"నీటి సరఫరా లేదు",lowSupply:"తక్కువ ఒత్తిడి / పరిమిత సరఫరా",quality:"నీటి నాణ్యతపై ఆందోళన",leakage:"పైప్‌లైన్ లీకేజీ",tapDamage:"పాడైన ప్రజా కుళాయి",other:"ఇతర సమస్య",location:"ప్రాంతం / గుర్తింపు స్థలం",describe:"సమస్య వివరించండి",yourName:"మీ పేరు (ఐచ్ఛికం)",contact:"సంప్రదింపు నంబర్ (ఐచ్ఛికం)",submitReport:"నివేదిక పంపండి",trackTitle:"నివేదికను ట్రాక్ చేయండి",trackDesc:"నివేదిక పంపినప్పుడు వచ్చిన రిఫరెన్స్ నంబర్ ఇవ్వండి.",reportNumber:"నివేదిక రిఫరెన్స్ నంబర్",trackNow:"స్థితి చూడండి",adminTitle:"నిర్వాహక డ్యాష్‌బోర్డ్",adminDesc:"నివేదికలను పరిశీలించి స్థితి లేదా నీటి లభ్యతను నవీకరించండి.",allReports:"సమాజ నివేదికలు",reportStatus:"నివేదిక స్థితి",waterStatusLabel:"నీటి పాయింట్ స్థితి",save:"నవీకరణ సేవ్ చేయండి",open:"కొత్తది",inReview:"పరిశీలనలో ఉంది",resolved:"పరిష్కరించబడింది",closed:"మూసివేయబడింది",statusUpdated:"ఈ డెమోలో స్థితి నవీకరించబడింది.",cspTitle:"సమాజ సేవా ప్రాజెక్ట్ సర్వే",cspDesc:"తాగునీటి లభ్యత మరియు మౌలిక సదుపాయాల అంచనా",studyArea:"అధ్యయన ప్రాంతం",background:"నేపథ్యం",problem:"సమస్య వివరణ",objectives:"లక్ష్యాలు",methodology:"సర్వే విధానం",findings:"ప్రధాన పరిశీలనలు",recommendations:"సిఫార్సులు",social:"ఇంజినీరింగ్ సామాజిక బాధ్యత",cspStudy:"ఈ అధ్యయనం ఆంధ్రప్రదేశ్‌లోని ఏలూరు జిల్లా జాలిపూడి గ్రామంపై దృష్టి పెడుతుంది. గృహాల నీటి వనరులు, ప్రజా నీటి పాయింట్లు, సరఫరా సమయాలు, కనిపించే మౌలిక సదుపాయాల పరిస్థితిని పరిశీలిస్తుంది.",cspBackground:"సురక్షితమైన, నమ్మదగిన తాగునీరు ఆరోగ్యం మరియు రోజువారీ జీవితానికి అవసరం. ప్రాంతం, వనరు, ఋతువు, సరఫరా సమయాన్ని బట్టి నీటి లభ్యత మారవచ్చు. అందుకే కుటుంబాల స్థాయి పరిశీలనలు ఉపయోగపడతాయి.",cspProblem:"అనియమిత సరఫరా, ప్రజా నీటి పాయింట్లకు పరిమిత ప్రాప్యత, పాడైన సదుపాయాలు లేదా నీటి నాణ్యతపై ఆందోళనలు ఉండవచ్చు. ఈ ప్రాజెక్ట్ నివాసుల అనుభవాలు, గమనించిన పరిస్థితులను నమోదు చేస్తుంది; నీటి భద్రతను ప్రయోగశాల ద్వారా నిర్ధారించదు.",cspObjectives:"• గృహాల తాగునీటి వనరులు, సరఫరా విధానాలను తెలుసుకోవడం.<br>• ప్రజా కుళాయిలు, పైప్‌లైన్లు, బోర్లు, ట్యాంకులను గుర్తించడం.<br>• ప్రాప్యత సమస్యలు, నివాసుల సూచనలను నమోదు చేయడం.<br>• సమాజం అనుసరించగల సిఫార్సులను రూపొందించడం.",cspMethod:"1. అధ్యయన ప్రాంతాన్ని నిర్ణయించి ప్రశ్నావళి సిద్ధం చేయడం.<br>2. ప్రాజెక్ట్ ఉద్దేశాన్ని వివరించి స్వచ్ఛంద భాగస్వామ్యాన్ని కోరడం.<br>3. అవసరమైతే తెలుగులో మాట్లాడి సమాధానాలను గౌరవంగా నమోదు చేయడం.<br>4. సదుపాయాల స్థానం, పరిస్థితి, సరఫరా సమయాలను గమనించడం.<br>5. సమాధానాలను సమీక్షించి, ప్రచురించే ముందు వివరాలను ధృవీకరించడం.",cspFindings:"పూర్తయిన సర్వేతో నిర్ధారించాల్సిన ఉదాహరణ అంశాలు: ప్రాంతాలవారీగా సరఫరా సమయాలు మారవచ్చు; ప్రజా కుళాయిలు, బోర్లు, గృహ నిల్వలు వేర్వేరుగా ఉపయోగించవచ్చు; నిర్వహణ మరియు నీటి నాణ్యతపై ఆందోళనలకు స్థానిక ఆధారాలు అవసరం.",cspRecommendations:"• సరఫరా సమయాలు, అంతరాయాలను ప్రాంతాలవారీగా నమోదు చేయండి.<br>• లీకేజీలు, పాడైన కుళాయిలను పరిశీలనకు ప్రాధాన్యంగా పంపండి.<br>• రిఫరెన్స్ నంబర్‌తో సమస్యలను నివేదించే అవకాశం కల్పించండి.<br>• నీటి నాణ్యతపై అనుమానాలను సంబంధిత అధికారులకు తెలియజేసి పరీక్ష చేయించండి.<br>• ధృవీకరణ తర్వాతే నీటి స్థితిని నవీకరించండి.",cspSocial:"ఇంజినీరింగ్ బాధ్యత అంటే సులభంగా ఉపయోగించగల సమాచారం, గోప్యత రక్షణ, నిజాయితీగా సర్వే ఫలితాల ప్రదర్శన, ఆధారంలేని భద్రతా హామీలను నివారించడం. ఈ వెబ్‌సైట్ అధికారిక నీటి పరీక్షకు లేదా స్థానిక అధికారుల చర్యలకు ప్రత్యామ్నాయం కాదు.",aboutRce:"రామచంద్ర కాలేజ్ ఆఫ్ ఇంజినీరింగ్",collegeText:"రామచంద్ర కాలేజ్ ఆఫ్ ఇంజినీరింగ్ ఆంధ్రప్రదేశ్‌లోని ఏలూరు, వట్లూరు వద్ద ఉంది. ఈ సంస్థ ఇంజినీరింగ్ విద్య, ప్రాయోగిక అభ్యాసం, విద్యార్థుల అభివృద్ధిపై దృష్టి పెడుతుంది. ఈ సమాజ సేవా ప్రాజెక్ట్ స్థానిక సమస్యను పరిశీలించి ఆధారాలతో కూడిన సిఫార్సులు రూపొందించడం ద్వారా సాంకేతిక విద్యను సమాజంతో కలుపుతుంది.",officialSite:"కళాశాల అధికారిక వెబ్‌సైట్ ↗",awarenessTitle:"చిన్న అలవాట్లు. సురక్షిత నీరు. బలమైన సమాజం.",awarenessDesc:"ఇళ్లలో, సమాజ ప్రదేశాల్లో పాటించగల నీటి అవగాహన సూచనలు.",safeStorage:"నీటిని సురక్షితంగా నిల్వ చేయండి",safeStorageText:"శుభ్రమైన, మూత ఉన్న పాత్రను వాడండి. తాగునీటిలో చేతులు లేదా అపరిశుభ్రమైన గ్లాసులు ముంచవద్దు.",reportLeak:"లీకేజీలను వెంటనే నివేదించండి",reportLeakText:"లీకయ్యే పైపు లేదా పాడైన కుళాయి నీటిని వృథా చేస్తుంది. పరిశీలించేందుకు స్థలాన్ని తెలియజేయండి.",qualityCheck:"నీటి నాణ్యతపై శ్రద్ధ వహించండి",qualityText:"రంగు మారడం లేదా వాసన ఉంటే నివేదించండి. రూపాన్ని బట్టి నీరు సురక్షితమని నిర్ధారించలేం; సరైన పరీక్ష అవసరం.",saveWater:"నీటిని బాధ్యతగా వాడండి",saveText:"కుళాయిలను పూర్తిగా మూసివేయండి, లీకేజీలను సరిచేయండి, అనుకూలమైన నీటిని అవసరానికి తగినట్లు మళ్లీ వాడండి.",community:"కలిసి పనిచేయండి",communityText:"ధృవీకరించిన సమాచారాన్ని పంచుకోండి, నీటి పాయింట్లను శుభ్రంగా ఉంచండి, సమస్యలను ఎలా నివేదించాలో ఇతరులకు తెలియజేయండి.",verify:"పంచుకునే ముందు ధృవీకరించండి",verifyText:"నీటి లభ్యత సమాచారాన్ని పంచుకునే ముందు దాని తేదీ, మూలాన్ని పరిశీలించండి.",noReports:"ఈ నంబర్‌కు సరిపోయే నివేదిక లేదు.",submitted:"ఈ ప్రోటోటైప్‌లో నివేదిక విజయవంతంగా పంపబడింది.",required:"దయచేసి అవసరమైన వివరాలను పూరించండి.",directionsAsk:"ఈ నీటి పాయింట్‌కు మీ ప్రస్తుత స్థానం నుంచి దిశలు కావాలా?",noLocation:"మీ స్థానం అందుబాటులో లేదు. స్థానం అనుమతించండి లేదా ప్రారంభ ప్రాంతాన్ని వెతకండి.",routeReady:"మ్యాప్‌లో మార్గం చూపబడింది. స్థానిక పరిస్థితులను పరిశీలించండి.",searchFail:"స్థలం కనబడలేదు. సమీప పట్టణం, గుర్తింపు స్థలం లేదా గ్రామం పేరు ప్రయత్నించండి.",mapNeedInternet:"ఇంటరాక్టివ్ మ్యాప్‌కు ఇంటర్నెట్ అవసరం.",status:"స్థితి",source:"మూలం",updated:"చివరిగా పరిశీలించినది",sample:"ఉదాహరణ నమోదు",currentLocation:"మీ స్థానం",fromHere:"మీ స్థానం నుంచి మార్గం",adminOnly:"ఈ విభాగం అడ్మిన్ డెమోలో మాత్రమే అందుబాటులో ఉంటుంది."}
+};
+let lang='en',role='user',currentPage='home',map=null,markers=[],routeLayer=null,userMarker=null,selectedPoint=null,userPos=null,reportSeq=1042;
+const points=[
+{id:'J-01',name:'Jalipudi Main Street',te:'జాలిపూడి ప్రధాన వీధి',lat:16.7050,lng:81.1050,status:'available',type:'Public tap',checked:'Example survey entry',detail:'Public tap · morning supply reported'},
+{id:'J-02',name:'Jalipudi School Road',te:'జాలిపూడి స్కూల్ రోడ్',lat:16.7090,lng:81.1115,status:'limited',type:'Borewell',checked:'Example survey entry',detail:'Borewell · limited supply reported'},
+{id:'J-03',name:'Jalipudi Market Junction',te:'జాలిపూడి మార్కెట్ కూడలి',lat:16.7005,lng:81.1130,status:'unavailable',type:'Public tap',checked:'Example survey entry',detail:'Public tap · interruption reported'},
+{id:'J-04',name:'Jalipudi Tank Area',te:'జాలిపూడి ట్యాంక్ ప్రాంతం',lat:16.7130,lng:81.1015,status:'available',type:'Storage tank',checked:'Example survey entry',detail:'Storage tank · status needs field confirmation'},
+{id:'E-01',name:'Eluru Bus Station Area',te:'ఏలూరు బస్ స్టేషన్ ప్రాంతం',lat:16.7100,lng:81.1030,status:'limited',type:'Community water point',checked:'Example survey entry',detail:'Illustrative point for map testing'}
+];
+let facilities=[
+{id:'F-01',name:'Public tap — Main Street',type:'Public tap',status:'Working',desc:'Example entry · reported supply in morning'},
+{id:'F-02',name:'Borewell — School Road',type:'Borewell',status:'Needs attention',desc:'Example entry · supply reportedly limited'},
+{id:'F-03',name:'Storage tank — Tank Area',type:'Storage tank',status:'Working',desc:'Example entry · verify maintenance schedule'},
+{id:'F-04',name:'Pipeline — Market Junction',type:'Pipeline',status:'Needs attention',desc:'Example entry · inspection suggested'},
+{id:'F-05',name:'Community water point',type:'Community water point',status:'Working',desc:'Example entry · confirm operating hours'},
+{id:'F-06',name:'Drainage near water point',type:'Drainage nearby',status:'Needs attention',desc:'Example entry · check separation and cleanliness'}
+];
+let reports=[
+{id:'NS-1041',category:'Pipeline leakage',location:'Jalipudi Market Junction',desc:'Example report: pipeline inspection requested.',name:'Community member',contact:'',status:'Under review',created:'Today'},
+{id:'NS-1040',category:'Limited supply',location:'Jalipudi School Road',desc:'Example report: supply timing needs confirmation.',name:'Resident',contact:'',status:'Open',created:'Yesterday'}
+];
+function tr(k){return (T[lang]&&T[lang][k])||T.en[k]||k}
+function toggleLanguage(){lang=lang==='en'?'te':'en';document.documentElement.lang=lang;document.getElementById('langLabel').textContent=lang==='en'?'తెలుగు':'English';document.querySelectorAll('[data-i18n]').forEach(el=>{let k=el.dataset.i18n;if(T[lang][k])el.innerHTML=T[lang][k]});if(!document.getElementById('app').classList.contains('hidden'))renderPage(currentPage)}
+function chooseRole(r){role=r;document.getElementById('userRole').classList.toggle('active',r==='user');document.getElementById('adminRole').classList.toggle('active',r==='admin');document.getElementById('loginPass').placeholder=r==='admin'?'Demo admin password':'Enter any demo password'}
+function login(){let n=document.getElementById('loginName').value.trim();let p=document.getElementById('loginPass').value;if(!n||!p){toast(tr('required'));return}document.getElementById('loginScreen').classList.add('hidden');document.getElementById('app').classList.remove('hidden');document.getElementById('logoutBtn').style.display='inline-flex';document.getElementById('adminNav').classList.toggle('hidden',role!=='admin');showApp(role==='admin'?'admin':'home')}
+function logout(){document.getElementById('app').classList.add('hidden');document.getElementById('loginScreen').classList.remove('hidden');document.getElementById('logoutBtn').style.display='none';if(map){map.remove();map=null}}
+function showApp(page){if(role!=='admin'&&page==='admin'){toast(tr('adminOnly'));return}currentPage=page;document.querySelectorAll('.navbtn').forEach(b=>b.classList.toggle('active',b.dataset.page===page));renderPage(page);window.scrollTo({top:0,behavior:'smooth'})}
+function statusText(s){return s==='available'?tr('available'):s==='limited'?tr('limited'):tr('unavailable')}
+function pill(s){return `<span class="pill ${s}">${statusText(s)}</span>`}
+function pageHead(title,desc,tag=''){return `<div class="pagehead"><div><h1>${title}</h1><p>${desc}</p></div>${tag?`<span class="tag"><i class="dot"></i>${tag}</span>`:''}</div>`}
+function renderPage(page){if(map){map.remove();map=null}routeLayer=null;userMarker=null;selectedPoint=null;const m=document.getElementById('mainContent');if(page==='home')m.innerHTML=homePage();if(page==='map')m.innerHTML=mapPage();if(page==='status')m.innerHTML=statusPage();if(page==='facilities')m.innerHTML=facilitiesPage();if(page==='report')m.innerHTML=reportPage();if(page==='track')m.innerHTML=trackPage();if(page==='csp')m.innerHTML=cspPage();if(page==='college')m.innerHTML=collegePage();if(page==='awareness')m.innerHTML=awarenessPage();if(page==='admin')m.innerHTML=adminPage();if(page==='map')initMap();if(page==='status')filterStatus();if(page==='facilities')filterFacilities();if(page==='csp')setupCsp()}
+function homePage(){let n=document.getElementById('loginName').value.trim()||'Community member';return `${pageHead(`${tr('hello')}, ${esc(n)} 👋`,tr('homeSub'),tr('surveyTag'))}<section class="hero"><div><div class="eyebrow">${tr('surveySnapshot')}</div><h2>${tr('homeHero')}</h2><p>${tr('heroDesc')}</p><button class="btn primary" onclick="showApp('map')">${tr('exploreMap')} →</button> <button class="btn" style="background:#ffffff20;color:#fff;border:1px solid #ffffff40" onclick="showApp('report')">${tr('reportProblem')}</button></div><div class="hero-art"><div class="water-illustration"><svg viewBox="0 0 120 120" fill="none"><path d="M60 8C48 29 25 50 25 72a35 35 0 0 0 70 0C95 50 72 29 60 8Z" fill="#fff"/><path d="M40 72c5 10 13 15 23 13" stroke="#087f8c" stroke-width="6" stroke-linecap="round"/><path d="M60 45v32m-13-13 13 13 13-13" stroke="#087f8c" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div></section><div class="statgrid"><div class="statcard"><span class="staticon">📍</span><div class="label">${tr('points')}</div><strong>04</strong><small>Jalipudi · ${tr('sample')}</small></div><div class="statcard"><span class="staticon">💧</span><div class="label">${tr('available')}</div><strong>02</strong><small>${tr('sample')}</small></div><div class="statcard"><span class="staticon">⏳</span><div class="label">${tr('limited')}</div><strong>01</strong><small>${tr('sample')}</small></div><div class="statcard"><span class="staticon">⚠️</span><div class="label">${tr('unavailable')}</div><strong>01</strong><small>${tr('sample')}</small></div></div><div class="sectionrow"><div><h2>${tr('recentStatus')}</h2><p>${tr('sampleNote')}</p></div><button class="btn outline small" onclick="showApp('status')">${tr('viewAll')} →</button></div><div class="grid2"><div class="card"><div class="status-list">${points.slice(0,3).map(p=>`<div class="status-row"><div><div class="place-name">${esc(lang==='te'?p.te:p.name)}</div><div class="place-sub">${p.id} · ${tr('sample')}</div></div>${pill(p.status)}</div>`).join('')}</div></div><div class="card"><h3>${tr('recentReports')}</h3><p>${tr('sampleNote')}</p><div class="status-list">${reports.slice(0,2).map(r=>`<div class="status-row"><div><div class="place-name">${r.id}</div><div class="place-sub">${esc(r.location)}</div></div><span class="pill ${r.status==='Resolved'?'available':'limited'}">${tr(r.status==='Open'?'open':r.status==='Under review'?'inReview':'resolved')}</span></div>`).join('')}</div><button class="btn soft small" onclick="showApp('track')">${tr('trackReport')} →</button></div></div>`}
+function mapPage(){return `${pageHead(tr('waterMapTitle'),tr('waterMapDesc'))}<div class="map-tools"><div class="searchbox"><input id="placeSearch" placeholder="${tr('searchPlace')}" onkeydown="if(event.key==='Enter')searchPlace()"><button class="btn primary" onclick="searchPlace()">${tr('search')}</button></div><button class="btn soft" onclick="locateMe()">◎ ${tr('useLocation')}</button></div><div class="filters"><select id="mapFilter" onchange="applyMapFilter()"><option value="all">${tr('allStatuses')}</option><option value="available">${tr('onlyAvailable')}</option><option value="limited">${tr('onlyLimited')}</option><option value="unavailable">${tr('onlyUnavailable')}</option></select></div><div class="legend"><span><i style="background:#168767"></i>${tr('available')}</span><span><i style="background:#e5a13b"></i>${tr('limited')}</span><span><i style="background:#d95050"></i>${tr('unavailable')}</span></div><div class="maplayout"><div id="map" class="mapbox"></div><div class="card map-side"><h3>${tr('selectedPoint')}</h3><div id="pointDetails" class="empty">${tr('chooseMarker')}</div><div class="footnote">${tr('mapTip')}</div><div id="routeInstructions"></div></div></div><p class="footnote">${tr('sampleNote')} Map search and street tiles need an internet connection.</p>`}
+function initMap(){if(!window.L){document.getElementById('map').innerHTML='<div class="empty">'+tr('mapNeedInternet')+'</div>';return}map=L.map('map').setView([16.705,81.108],13);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(map);markers=[];points.forEach(p=>addPointMarker(p));setTimeout(()=>map&&map.invalidateSize(),200)}
+function addPointMarker(p){if(!map)return;let color=p.status==='available'?'#168767':p.status==='limited'?'#e5a13b':'#d95050';let icon=L.divIcon({className:'',html:`<div style="width:23px;height:23px;border:3px solid white;border-radius:50%;background:${color};box-shadow:0 2px 8px #0005"></div>`,iconSize:[23,23],iconAnchor:[11,11]});let mk=L.marker([p.lat,p.lng],{icon}).addTo(map);mk.bindTooltip(esc(lang==='te'?p.te:p.name));mk.on('click',()=>selectPoint(p));markers.push({p,mk})}
+function applyMapFilter(){let f=document.getElementById('mapFilter').value;markers.forEach(({p,mk})=>{if(f==='all'||p.status===f){if(!map.hasLayer(mk))mk.addTo(map)}else if(map.hasLayer(mk))map.removeLayer(mk)})}
+function selectPoint(p){selectedPoint=p;document.getElementById('pointDetails').innerHTML=`<div style="text-align:left"><span class="pill ${p.status}">${statusText(p.status)}</span><h3 style="margin:12px 0 4px">${esc(lang==='te'?p.te:p.name)}</h3><p>${p.id} · ${esc(p.type)}</p><p style="margin-top:8px">${esc(p.detail)}</p><p style="font-size:11px;margin-top:9px">${tr('updated')}: ${tr('sample')}</p><button class="btn primary wide" style="margin-top:14px" onclick="askDirections()">${tr('directions')} →</button></div>`;document.getElementById('routeInstructions').innerHTML='';map.setView([p.lat,p.lng],15)}
+function askDirections(){if(!selectedPoint)return;if(confirm(tr('directionsAsk')))routeToSelected();else toast(lang==='te'?'సరే. దిశలు ప్రారంభించలేదు.':'Okay — directions were not started.')}
+async function routeToSelected(){if(!selectedPoint)return;if(!userPos){try{userPos=await getPosition()}catch(e){let q=prompt(tr('noLocation'));if(q){document.getElementById('placeSearch').value=q;await searchPlace();return}toast(tr('noLocation'));return}}if(!map)return;map.setView([userPos.lat,userPos.lng],13);if(userMarker)map.removeLayer(userMarker);userMarker=L.marker([userPos.lat,userPos.lng]).addTo(map).bindPopup(tr('currentLocation'));if(routeLayer)map.removeLayer(routeLayer);try{let url=`https://router.project-osrm.org/route/v1/driving/${userPos.lng},${userPos.lat};${selectedPoint.lng},${selectedPoint.lat}?overview=full&geometries=geojson`;let r=await fetch(url);let d=await r.json();if(d.routes&&d.routes[0]){routeLayer=L.geoJSON(d.routes[0].geometry,{style:{color:'#087f8c',weight:5,opacity:.85}}).addTo(map);map.fitBounds(routeLayer.getBounds(),{padding:[25,25]});let km=(d.routes[0].distance/1000).toFixed(1),mins=Math.round(d.routes[0].duration/60);document.getElementById('routeInstructions').innerHTML=`<div class="report-number"><strong>↗ ${km} km</strong><p>${mins} min approx. · driving route</p><p>${tr('routeReady')}</p><a target="_blank" rel="noopener" href="https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=${userPos.lat}%2C${userPos.lng}%3B${selectedPoint.lat}%2C${selectedPoint.lng}">Open route details ↗</a></div>`}else throw Error()}catch(e){document.getElementById('routeInstructions').innerHTML=`<div class="report-number"><p>${tr('routeReady')}</p><a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=${userPos.lat},${userPos.lng}&destination=${selectedPoint.lat},${selectedPoint.lng}&travelmode=driving">Open turn-by-turn directions ↗</a></div>`}}
+function getPosition(){return new Promise((res,rej)=>{if(!navigator.geolocation)return rej(Error('no geolocation'));navigator.geolocation.getCurrentPosition(p=>res({lat:p.coords.latitude,lng:p.coords.longitude}),rej,{enableHighAccuracy:true,timeout:10000})})}
+async function locateMe(){try{userPos=await getPosition();if(!map)return;map.setView([userPos.lat,userPos.lng],14);if(userMarker)map.removeLayer(userMarker);userMarker=L.marker([userPos.lat,userPos.lng]).addTo(map).bindPopup(tr('currentLocation')).openPopup();let nearby=[...points].sort((a,b)=>distance(userPos,a)-distance(userPos,b))[0];if(nearby){selectPoint(nearby);toast((lang==='te'?'సమీప ఉదాహరణ పాయింట్: ':'Nearest example point: ')+(lang==='te'?nearby.te:nearby.name))}}catch(e){toast(tr('noLocation'))}}
+function distance(a,b){return Math.hypot((a.lat-b.lat)*111,(a.lng-b.lng)*95)}
+async function searchPlace(){let q=document.getElementById('placeSearch').value.trim();if(!q){toast(tr('searchFail'));return}try{let r=await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&q='+encodeURIComponent(q+', Andhra Pradesh, India'));let d=await r.json();if(!d.length){r=await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&q='+encodeURIComponent(q));d=await r.json()}if(!d.length){toast(tr('searchFail'));return}let loc=d[0],lat=+loc.lat,lng=+loc.lon;map.setView([lat,lng],14);L.popup().setLatLng([lat,lng]).setContent(`<strong>${esc(loc.display_name.split(',').slice(0,2).join(','))}</strong><br><small>${lang==='te'?'ఈ ప్రదేశం చుట్టూ ఉదాహరణ నీటి పాయింట్లు చూపబడ్డాయి':'Example water points are shown around this searched place'}</small>`).openOn(map);markers.forEach(({p,mk})=>{let shifted={...p,lat:lat+(p.lat-16.705)*.3,lng:lng+(p.lng-81.108)*.3};mk.setLatLng([shifted.lat,shifted.lng]);mk._demoOriginal=p});toast(lang==='te'?'మ్యాప్ ఎంచుకున్న ప్రాంతానికి వెళ్లింది':'Map moved to the searched place. Pins are illustrative sample records.')}catch(e){toast(tr('searchFail'))}}
+function statusPage(){return `${pageHead(tr('waterStatus'),tr('waterMapDesc'))}<div class="card"><div class="filters"><div class="searchbox"><input id="statusSearch" placeholder="${tr('searchPlace')}" oninput="filterStatus()"></div><select id="statusFilter" onchange="filterStatus()"><option value="all">${tr('allStatuses')}</option><option value="available">${tr('onlyAvailable')}</option><option value="limited">${tr('onlyLimited')}</option><option value="unavailable">${tr('onlyUnavailable')}</option></select></div><p class="footnote">${tr('sampleNote')}</p><div id="statusResults" class="status-list"></div></div>`}
+function filterStatus(){let el=document.getElementById('statusResults');if(!el)return;let q=(document.getElementById('statusSearch')?.value||'').toLowerCase(),f=document.getElementById('statusFilter')?.value||'all';let arr=points.filter(p=>(f==='all'||p.status===f)&&(p.name.toLowerCase().includes(q)||p.id.toLowerCase().includes(q)||p.type.toLowerCase().includes(q)||(p.te||'').includes(q)));el.innerHTML=arr.length?arr.map(p=>`<div class="status-row"><div><div class="place-name">${esc(lang==='te'?p.te:p.name)}</div><div class="place-sub">${p.id} · ${p.type} · ${tr('sample')}</div><div class="place-sub">${esc(p.detail)}</div></div><div style="display:flex;align-items:center;gap:9px">${pill(p.status)}<button class="btn soft small" onclick="showApp('map')">${tr('waterMap')} ↗</button></div></div>`).join(''):'<div class="empty">No matching locations</div>'}
+function facilitiesPage(){return `${pageHead(tr('facilities'),tr('facilityDesc'))}<div class="filters"><select id="facilityType" onchange="filterFacilities()"><option value="all">${tr('allTypes')}</option>${['Public tap','Borewell','Storage tank','Pipeline','Community water point','Drainage nearby'].map(t=>`<option>${t}</option>`).join('')}</select><select id="facilityStatus" onchange="filterFacilities()"><option value="all">${lang==='te'?'అన్ని స్థితులు':'All conditions'}</option><option>Working</option><option>Needs attention</option></select></div><div id="facilityResults" class="facility-grid"></div><p class="footnote">${tr('sampleNote')}</p>`}
+function filterFacilities(){let el=document.getElementById('facilityResults');if(!el)return;let t=document.getElementById('facilityType')?.value||'all',s=document.getElementById('facilityStatus')?.value||'all';let arr=facilities.filter(f=>(t==='all'||f.type===t)&&(s==='all'||f.status===s));let icons={'Public tap':'🚰','Borewell':'💧','Storage tank':'🛢️','Pipeline':'〰️','Community water point':'🏘️','Drainage nearby':'🧹'};el.innerHTML=arr.map(f=>`<div class="facility"><div class="ficon">${icons[f.type]||'💧'}</div><h3>${esc(f.name)}</h3><p>${esc(f.desc)}</p><span class="pill ${f.status==='Working'?'available':'limited'}">${f.status==='Working'?tr('working'):tr('needsAttention')}</span><div style="margin-top:12px"><button class="btn outline small" onclick="showApp('map')">${tr('waterMap')} ↗</button></div></div>`).join('')||'<div class="empty">No facilities match this filter.</div>'}
+function reportPage(){return `${pageHead(tr('reportTitle'),tr('reportDesc'))}<div class="voicebar"><button class="mic" onclick="startVoice()" title="Voice input">🎙</button><div><strong>${tr('voiceTitle')}</strong><p>${tr('voiceDesc')}</p></div><button class="btn soft small" onclick="startVoice()">${tr('startVoice')}</button></div><form class="card" onsubmit="submitReport(event)"><div class="formgrid"><div class="field"><label>${tr('category')} *</label><select id="rCategory" required><option value="">${tr('selectCategory')}</option><option>${tr('noSupply')}</option><option>${tr('lowSupply')}</option><option>${tr('quality')}</option><option>${tr('leakage')}</option><option>${tr('tapDamage')}</option><option>${tr('other')}</option></select></div><div class="field"><label>${tr('location')} *</label><input id="rLocation" required placeholder="e.g. Jalipudi School Road"></div><div class="field span2"><label>${tr('describe')} *</label><textarea id="rDesc" required placeholder="Tell us what happened, when it started, and any nearby landmark…"></textarea></div><div class="field"><label>${tr('yourName')}</label><input id="rName" placeholder="Optional"></div><div class="field"><label>${tr('contact')}</label><input id="rContact" inputmode="tel" placeholder="Optional"></div></div><button class="btn primary" type="submit">${tr('submitReport')} →</button><p class="footnote">Please avoid entering sensitive personal information. This prototype stores reports only in the current browser session.</p><div id="reportSuccess"></div></form>`}
+function startVoice(){let SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){toast(lang==='te'?'మీ బ్రౌజర్‌లో వాయిస్ ఇన్‌పుట్ అందుబాటులో లేదు. కీబోర్డ్ ఉపయోగించండి.':'Voice input is not supported in this browser. Please type instead.');return}let rec=new SR();rec.lang=lang==='te'?'te-IN':'en-IN';rec.interimResults=false;rec.onresult=e=>{document.getElementById('rDesc').value=e.results[0][0].transcript};rec.onerror=()=>toast('Voice input could not be captured. Try again.');rec.start();toast(lang==='te'?'ఇప్పుడు మాట్లాడండి…':'Listening… speak now.')}
+function submitReport(e){e.preventDefault();let cat=document.getElementById('rCategory').value,loc=document.getElementById('rLocation').value.trim(),desc=document.getElementById('rDesc').value.trim();if(!cat||!loc||!desc){toast(tr('required'));return}let id='NS-'+(++reportSeq);reports.unshift({id,category:cat,location:loc,desc,name:document.getElementById('rName').value||'Anonymous',contact:document.getElementById('rContact').value,status:'Open',created:'Just now'});document.getElementById('reportSuccess').innerHTML=`<div class="report-number"><div>${tr('submitted')}</div><p>${tr('reportNumber')}</p><strong>${id}</strong><p>Save this number to track your report.</p><button type="button" class="btn soft small" onclick="navigator.clipboard?.writeText('${id}');toast('Reference copied')">Copy reference</button> <button type="button" class="btn primary small" onclick="showApp('track')">${tr('trackReport')} →</button></div>`;e.target.reset()}
+function trackPage(){return `${pageHead(tr('trackTitle'),tr('trackDesc'))}<div class="card" style="max-width:650px"><div class="field"><label>${tr('reportNumber')}</label><input id="trackId" placeholder="e.g. NS-1042"></div><button class="btn primary" onclick="trackReport()">${tr('trackNow')} →</button><div id="trackResult"></div><div class="footnote">Demo records: NS-1040, NS-1041. Newly submitted reports are also searchable in this session.</div></div>`}
+function trackReport(){let id=document.getElementById('trackId').value.trim().toUpperCase(),r=reports.find(x=>x.id===id),el=document.getElementById('trackResult');if(!r){el.innerHTML=`<div class="empty">${tr('noReports')}</div>`;return}el.innerHTML=`<div class="report-number"><strong>${r.id}</strong><p>${esc(r.category)} · ${esc(r.location)}</p><span class="pill ${r.status==='Resolved'?'available':r.status==='Open'?'limited':'available'}">${tr(r.status==='Open'?'open':r.status==='Under review'?'inReview':r.status==='Resolved'?'resolved':'closed')}</span><p style="margin-top:12px">${esc(r.desc)}</p><p>${tr('updated')}: ${r.created}</p></div>`}
+function adminPage(){return `${pageHead(tr('adminTitle'),tr('adminDesc'),'ADMIN DEMO')}<div class="statgrid"><div class="statcard"><div class="label">${tr('allReports')}</div><strong>${reports.length}</strong><small>Current session</small></div><div class="statcard"><div class="label">${tr('open')}</div><strong>${reports.filter(r=>r.status==='Open').length}</strong><small>Need review</small></div><div class="statcard"><div class="label">${tr('inReview')}</div><strong>${reports.filter(r=>r.status==='Under review').length}</strong><small>Being checked</small></div><div class="statcard"><div class="label">${tr('resolved')}</div><strong>${reports.filter(r=>r.status==='Resolved').length}</strong><small>Closed loop</small></div></div><div class="card"><div class="sectionrow" style="margin-top:0"><div><h2>${tr('allReports')}</h2><p>Update report status and reported water-point status.</p></div></div><div class="tablewrap"><table class="data-table"><thead><tr><th>Reference / location</th><th>Issue</th><th>${tr('reportStatus')}</th><th>${tr('waterStatusLabel')}</th><th></th></tr></thead><tbody>${reports.map((r,i)=>`<tr><td><strong>${r.id}</strong><br>${esc(r.location)}</td><td>${esc(r.category)}<br><small>${esc(r.desc)}</small></td><td><select id="rs-${i}"><option ${r.status==='Open'?'selected':''}>Open</option><option ${r.status==='Under review'?'selected':''}>Under review</option><option ${r.status==='Resolved'?'selected':''}>Resolved</option><option ${r.status==='Closed'?'selected':''}>Closed</option></select></td><td><select id="ws-${i}"><option value="available">Available</option><option value="limited">Limited supply</option><option value="unavailable">Unavailable</option></select></td><td><button class="btn primary small" onclick="saveAdmin(${i})">${tr('save')}</button></td></tr>`).join('')}</tbody></table></div><p class="footnote">Admin changes in this prototype affect the current session only. A real deployment needs secure roles, a database, audit logs and verified field updates.</p></div>`}
+function saveAdmin(i){let s=document.getElementById('rs-'+i).value;reports[i].status=s;let ws=document.getElementById('ws-'+i).value;let p=points.find(p=>p.name.toLowerCase().includes(reports[i].location.toLowerCase())||reports[i].location.toLowerCase().includes(p.name.toLowerCase()));if(p)p.status=ws;toast(tr('statusUpdated'));renderPage('admin')}
+function cspPage(){return `${pageHead(tr('cspTitle'),tr('cspDesc'),tr('surveyTag'))}<div class="card"><div class="eyebrow" style="color:var(--teal)">JALIPUDI VILLAGE · ELURU DISTRICT · ANDHRA PRADESH</div><h2 style="font-size:26px;margin:8px 0 5px">${tr('cspDesc')}</h2><p class="muted">Community Service Project · Field study and infrastructure assessment</p><div class="cspnav" id="cspnav">${[['studyArea','⌖'],['background','◉'],['problem','!'],['objectives','◎'],['methodology','☷'],['findings','▤'],['recommendations','✓'],['social','♡']].map((x,i)=>`<button class="${i===0?'active':''}" onclick="cspJump('${x[0]}',this)">${x[1]} ${tr(x[0])}</button>`).join('')}</div><div class="cspsection" id="csp-studyArea"><h3>01 · ${tr('studyArea')}</h3><p>${tr('cspStudy')}</p></div><div class="cspsection" id="csp-background"><h3>02 · ${tr('background')}</h3><p>${tr('cspBackground')}</p></div><div class="cspsection" id="csp-problem"><h3>03 · ${tr('problem')}</h3><p>${tr('cspProblem')}</p></div><div class="cspsection" id="csp-objectives"><h3>04 · ${tr('objectives')}</h3><p>${tr('cspObjectives')}</p></div><div class="cspsection" id="csp-methodology"><h3>05 · ${tr('methodology')}</h3><p>${tr('cspMethod')}</p></div><div class="cspsection" id="csp-findings"><h3>06 · ${tr('findings')}</h3><p>${tr('cspFindings')}</p></div><div class="cspsection" id="csp-recommendations"><h3>07 · ${tr('recommendations')}</h3><p>${tr('cspRecommendations')}</p></div><div class="cspsection" id="csp-social"><h3>08 · ${tr('social')}</h3><p>${tr('cspSocial')}</p></div><p class="footnote">${tr('sampleNote')} The final report should use your actual survey counts, dates, observations and verified findings.</p></div>`}
+function cspJump(id,b){document.getElementById('csp-'+id).scrollIntoView({behavior:'smooth',block:'start'});document.querySelectorAll('#cspnav button').forEach(x=>x.classList.remove('active'));b.classList.add('active')}
+function setupCsp(){}
+function collegePage(){return `${pageHead(tr('aboutCollege'),'Institutional context for the Community Service Project')}<div class="card"><div class="collegehero"><img src="assets/ramachandra-college-campus.png" alt="Aerial view of Ramachandra College of Engineering campus at sunset"><div><div class="eyebrow" style="color:var(--teal)">RCE · ELURU, ANDHRA PRADESH</div><h2>${tr('aboutRce')}</h2><p class="muted">${tr('collegeText')}</p><div class="collegefacts"><span>📍 Vatluru, Eluru</span><span>🎓 Engineering education</span><span>🌱 Community engagement</span></div><p style="margin-top:18px"><a class="btn primary" style="display:inline-block;text-decoration:none" target="_blank" rel="noopener" href="https://www.rcee.ac.in/">${tr('officialSite')}</a></p></div></div><section class="college-description"><h3>About Ramachandra College of Engineering</h3><p>At Ramachandra College of Engineering, we are committed to excellence and innovation. Established by the visionary founders of RATNAM EDUCATIONAL INSTITUTIONS of Nellore, Ramachandra College of Engineering (RCE), operating under Ganta Sriram Educational Society, is an autonomous institution offering undergraduate (B.Tech) and postgraduate (M.Tech &amp; MBA) programs. RCE is now an autonomous institution, initially affiliated with JNTU Kakinada. Our state-of-the-art facilities, well-built infrastructure, and serene, lush green campus provide an ideal environment for learning, far from the hustle and bustle of the town.</p><p>RCE is a vibrant, forward-looking institution offering high-quality learning experiences in a welcoming and friendly environment. The college aims to establish academic credibility by offering dynamic undergraduate engineering programs, industry interface, research, and consultancy. RCE's team of highly experienced, well-qualified, and dedicated faculty members, along with guest lectures by eminent professors and industry experts, ensures a comprehensive educational experience.</p><p>The college organizes periodical industrial visits and educational tours to supplement classroom lectures. RCE constantly updates its physical infrastructure and research and education facilities to maintain national prominence in providing outstanding education in computing and engineering fields.</p><p>RCE has consistently achieved high pass percentages, with the majority of students securing distinctions. All classrooms are air-conditioned, and the campus maintains a 100% ragging-free environment. The institute offers additional support to students from disadvantaged backgrounds to help them succeed academically.</p><p>RCE provides excellent infrastructure for seminars, conferences, and workshops. Regular classroom seminars, group discussions, quizzes, mock interviews, department association activities, and professional society activities distinguish RCE from other institutions. The teaching-learning process is application and industry-oriented, with a focus on e-learning and online academic activities.</p><p>The institute has signed MOUs with various multinational companies like TATA and Reliance HR Solutions, providing students with opportunities for industrial visits and practical experience. Each department has technology forums and hobby clubs for knowledge transfer, as well as departmental libraries in addition to the central library. Students receive counseling on professional and personality development, and the college offers central seminar halls and auditoriums for student use.</p><p>RCE provides more than adequate computers connected through LAN and high-speed internet connectivity. The college also offers excellent facilities for indoor and outdoor games and sports, with trainers available to help students maintain a balance between academics and physical health.</p></section></div><p class="footnote">Campus image supplied for this project. Please confirm institutional details with the college before final submission.</p>`}
+function awarenessPage(){let cards=[['https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=900&q=80','safeStorage','safeStorageText'],['https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=900&q=80','reportLeak','reportLeakText'],['https://images.unsplash.com/photo-1581093458791-9d15482442f5?auto=format&fit=crop&w=900&q=80','qualityCheck','qualityText'],['https://images.unsplash.com/photo-1530053969600-caed2596d242?auto=format&fit=crop&w=900&q=80','saveWater','saveText'],['https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=80','community','communityText'],['https://images.unsplash.com/photo-1437482078695-73f5ca6c96e2?auto=format&fit=crop&w=900&q=80','verify','verifyText']];return `${pageHead(tr('awarenessTitle'),tr('awarenessDesc'))}<div class="awareness-grid">${cards.map(c=>`<article class="awareness"><img src="${c[0]}" alt="${tr(c[1])}" loading="lazy" onerror="this.style.display='none'"><div><h3>${tr(c[1])}</h3><p>${tr(c[2])}</p></div></article>`).join('')}</div><p class="footnote">Awareness images are illustrative. Water-quality concerns should be referred to qualified local authorities for proper testing.</p>`}
+function toast(msg){let t=document.getElementById('toast');t.textContent=msg;t.classList.remove('hidden');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.classList.add('hidden'),3500)}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+</script>
+<script>
+if(!window.L){
+  const leafletFallback=document.createElement('script');
+  leafletFallback.src='https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js';
+  leafletFallback.onload=()=>{if(currentPage==='map')initMap()};
+  leafletFallback.onerror=()=>{const el=document.getElementById('map');if(el)el.innerHTML='<div class="empty">The map library could not be loaded. Check your internet connection and reload the page.</div>'};
+  document.head.appendChild(leafletFallback);
+  const leafletStyles=document.createElement('link');
+  leafletStyles.rel='stylesheet';
+  leafletStyles.href='https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css';
+  document.head.appendChild(leafletStyles);
+}
+initMap=function(){
+  const el=document.getElementById('map');
+  if(!el)return;
+  if(!window.L){el.innerHTML='<div class="empty">The map could not be loaded. Check your internet connection and <button class="btn soft small" onclick="location.reload()">reload the page</button>.</div>';return}
+  map=L.map('map').setView([16.705,81.108],13);
+  const osm=L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'});
+  const backup=L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:19,attribution:'© OpenStreetMap © CARTO'});
+  let usingBackup=false;
+  osm.on('tileerror',()=>{if(usingBackup)return;usingBackup=true;map.removeLayer(osm);backup.addTo(map)});
+  osm.addTo(map);
+  markers=[];
+  points.forEach(p=>addPointMarker(p));
+  setTimeout(()=>map&&map.invalidateSize(),250);
+};
+const originalCspPage=cspPage;
+cspPage=function(){
+  const overview=`<section class="csp-overview card"><div class="csp-overview-head"><div class="eyebrow" style="color:var(--teal)">FROM FIELD OBSERVATION TO COMMUNITY ACTION</div><h2>Understanding the complete water-access picture</h2><p>The survey connects household experiences with visible infrastructure and clear next steps.</p></div><div class="csp-image-grid"><article class="csp-image-card"><img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Clean water being collected for household use" loading="lazy"><div><h3>Household access</h3><p>Document sources, access, supply timing, and storage practices shared by participating households.</p></div></article><article class="csp-image-card"><img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Water resource representing local supply and infrastructure" loading="lazy"><div><h3>Local infrastructure</h3><p>Map public taps and other visible facilities; record condition and reported interruptions for follow-up.</p></div></article><article class="csp-image-card"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Community members working together" loading="lazy"><div><h3>Community-led action</h3><p>Share verified observations respectfully and route maintenance or quality concerns to the right authority.</p></div></article></div><p class="csp-note">These photographs are illustrative, not evidence from Jalipudi. Survey counts and findings shown elsewhere must be checked against the completed fieldwork before publication.</p></section>`;
+  return originalCspPage().replace('<div class="card">',overview+'<div class="card">');
+};
+const originalAwarenessPage=awarenessPage;
+awarenessPage=function(){
+  const extra='<article class="awareness"><img src="https://images.unsplash.com/photo-1530053969600-caed2596d242?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Water conservation" loading="lazy"><div><h3>Use water thoughtfully</h3><p>Turn off taps when not in use, repair leaks promptly, and reuse suitable water for non-drinking purposes where safe.</p></div></article><article class="awareness"><img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Clean water storage" loading="lazy"><div><h3>Keep containers clean</h3><p>Wash storage vessels regularly, keep them covered, and use a clean ladle instead of touching drinking water.</p></div></article><article class="awareness"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Community members sharing information" loading="lazy"><div><h3>Share concerns responsibly</h3><p>Give a clear location and date when reporting an issue. Avoid forwarding unverified claims about water safety.</p></div></article>';
+  return originalAwarenessPage().replace('</div><p class="footnote">Awareness images are illustrative.',extra+'</div><p class="footnote">Awareness images are illustrative.');
+};
+const awarenessPageWithExtras=awarenessPage;
+awarenessPage=function(){
+  return awarenessPageWithExtras()
+    .replace('photo-1581093458791-9d15482442f5','photo-1518837695005-2083093ee35b')
+    .replace('<h3>Use water thoughtfully</h3><p>Turn off taps when not in use, repair leaks promptly, and reuse suitable water for non-drinking purposes where safe.</p>','<h3>Reuse water where appropriate</h3><p>Reuse suitable water for gardening or cleaning, but never for drinking or food preparation.</p>');
+};
+</script>
+<script>
+const renderPageWithoutDemoBanner=renderPage;
+renderPage=function(page){
+  renderPageWithoutDemoBanner(page);
+  const main=document.getElementById('mainContent');
+  if(!main)return;
+  const banner=document.createElement('aside');
+  banner.className='demo-banner';
+  banner.setAttribute('role','note');
+  banner.innerHTML='<span class="demo-banner-icon" aria-hidden="true">ⓘ</span><div><strong>DEMO MODE — illustrative records only</strong><p>Water-point, facility and report examples are not verified survey findings. New reports and admin changes remain in this browser session; no database or live water-quality data is connected.</p></div>';
+  main.prepend(banner);
+};
+const showAppWithoutAria=showApp;
+showApp=function(page){
+  showAppWithoutAria(page);
+  document.querySelectorAll('.navbtn').forEach(button=>{
+    if(button.dataset.page===page)button.setAttribute('aria-current','page');
+    else button.removeAttribute('aria-current');
+  });
+};
+document.querySelectorAll('.navbtn.active').forEach(button=>button.setAttribute('aria-current','page'));
+const demoAccountStorageKey='waterCareDemoAccountsV1';
+let authMode='signin';
+let authenticatedDemoUser=null;
+function setAuthMode(mode){
+  authMode=mode;
+  document.getElementById('authHeading').textContent=mode==='signup'?'Create your account':'Welcome back';
+  document.getElementById('authIntro').textContent=mode==='signup'?'Create a  account with a username and password.':'Sign in with the username and password you registered.';
+  document.getElementById('authChoice').classList.add('hidden');
+  document.getElementById('roleSelect').classList.add('hidden');
+  document.getElementById('authForm').classList.remove('hidden');
+  document.getElementById('confirmPasswordField').classList.toggle('hidden',mode!=='signup');
+  document.getElementById('authFormHeading').textContent=mode==='signup'?'Create account':'Sign in';
+  document.getElementById('authFormHint').textContent=mode==='signup'?'Username: 3–32 letters, numbers, dots, dashes or underscores. Password: at least 8 characters.':'Enter your registered username and password.';
+  document.getElementById('authSubmit').textContent=mode==='signup'?'Create account':'Sign in';
+  document.getElementById('loginPass').setAttribute('autocomplete',mode==='signup'?'new-password':'current-password');
+  document.getElementById('authMessage').textContent='';
+  document.getElementById('loginPass').value='';
+  document.getElementById('confirmPassword').value='';
+  document.getElementById('loginName').focus();
+}
+function returnToAuthChoice(){
+  authenticatedDemoUser=null;
+  document.getElementById('roleSelect').classList.add('hidden');
+  document.getElementById('authForm').classList.add('hidden');
+  document.getElementById('authChoice').classList.remove('hidden');
+  document.getElementById('authHeading').textContent='Welcome';
+  document.getElementById('authIntro').textContent='Create an  account or sign in with an account you have already created.';
+  document.getElementById('authMessage').textContent='';
+  document.getElementById('loginPass').value='';
+  document.getElementById('confirmPassword').value='';
+}
+function readDemoAccounts(){
+  const saved=localStorage.getItem(demoAccountStorageKey);
+  if(saved===null)return {};
+  const accounts=JSON.parse(saved);
+  if(!accounts||typeof accounts!=='object'||Array.isArray(accounts))throw new Error('Stored account data is invalid.');
+  return accounts;
+}
+async function hashDemoPassword(password,salt){
+  if(!crypto.subtle)throw new Error('Secure password hashing is unavailable in this browser context. Open this site through localhost or a secure HTTPS host.');
+  const material=await crypto.subtle.importKey('raw',new TextEncoder().encode(password),'PBKDF2',false,['deriveBits']);
+  const hash=await crypto.subtle.deriveBits({name:'PBKDF2',salt,iterations:150000,hash:'SHA-256'},material,256);
+  return Array.from(new Uint8Array(hash),byte=>byte.toString(16).padStart(2,'0')).join('');
+}
+function showAuthError(message){
+  const status=document.getElementById('authMessage');
+  status.textContent=message;
+  status.setAttribute('role','alert');
+}
+async function login(){
+  const username=document.getElementById('loginName').value.trim();
+  const normalized=username.toLowerCase();
+  const password=document.getElementById('loginPass').value;
+  const confirm=document.getElementById('confirmPassword').value;
+  const usernamePattern=/^[A-Za-z0-9._-]{3,32}$/;
+  if(!usernamePattern.test(username)){
+    showAuthError('Use a username with 3–32 letters, numbers, dots, dashes or underscores.');
+    return;
+  }
+  if(password.length<8||password.length>128){
+    showAuthError('Use a password between 8 and 128 characters.');
+    return;
+  }
+  try{
+    const accounts=readDemoAccounts();
+    if(authMode==='signup'){
+      if(password!==confirm){
+        showAuthError('The passwords do not match.');
+        return;
+      }
+      if(Object.prototype.hasOwnProperty.call(accounts,normalized)){
+        showAuthError('That username is already registered in this browser. Sign in instead.');
+        return;
+      }
+      const salt=crypto.getRandomValues(new Uint8Array(16));
+      accounts[normalized]={username,salt:Array.from(salt),passwordHash:await hashDemoPassword(password,salt),createdAt:new Date().toISOString()};
+      localStorage.setItem(demoAccountStorageKey,JSON.stringify(accounts));
+    }else{
+      const account=accounts[normalized];
+      if(!account||!Array.isArray(account.salt)||typeof account.passwordHash!=='string'){
+        showAuthError('Username or password is incorrect. Create an account first if you are new.');
+        return;
+      }
+      const salt=new Uint8Array(account.salt);
+      if(await hashDemoPassword(password,salt)!==account.passwordHash){
+        showAuthError('Username or password is incorrect.');
+        return;
+      }
+      authenticatedDemoUser=account.username;
+    }
+    if(authMode==='signup')authenticatedDemoUser=username;
+    document.getElementById('loginName').value=authenticatedDemoUser;
+    document.getElementById('loginPass').value='';
+    document.getElementById('confirmPassword').value='';
+    document.getElementById('authForm').classList.add('hidden');
+    document.getElementById('authChoice').classList.add('hidden');
+    document.getElementById('roleSelect').classList.remove('hidden');
+    document.getElementById('authHeading').textContent=`Hello, ${authenticatedDemoUser}`;
+    document.getElementById('authIntro').textContent='Your demo account is ready. Choose which part of the prototype to open.';
+    chooseRole('user');
+  }catch(error){
+    showAuthError(error instanceof Error?`Could not access  accounts: ${error.message}`:'Could not access  accounts in this browser.');
+  }
+}
+function chooseRole(selectedRole){
+  role=selectedRole;
+  document.getElementById('userRole').classList.toggle('active',selectedRole==='user');
+  document.getElementById('adminRole').classList.toggle('active',selectedRole==='admin');
+}
+function continueToApp(){
+  if(!authenticatedDemoUser){
+    returnToAuthChoice();
+    return;
+  }
+  document.getElementById('loginScreen').classList.add('hidden');
+  document.getElementById('app').classList.remove('hidden');
+  document.getElementById('logoutBtn').style.display='inline-flex';
+  document.getElementById('adminNav').classList.toggle('hidden',role!=='admin');
+  showApp(role==='admin'?'admin':'home');
+}
+function logout(){
+  authenticatedDemoUser=null;
+  role='user';
+  document.getElementById('app').classList.add('hidden');
+  document.getElementById('loginScreen').classList.remove('hidden');
+  document.getElementById('logoutBtn').style.display='none';
+  document.getElementById('adminNav').classList.add('hidden');
+  returnToAuthChoice();
+  if(map){map.remove();map=null}
+}
+function syncLandingRoute(){
+  const isProjectRoute=window.location.hash==='#project';
+  document.getElementById('landingPage').classList.toggle('hidden',isProjectRoute);
+  document.getElementById('projectApp').classList.toggle('hidden',!isProjectRoute);
+  if(!isProjectRoute)window.scrollTo({top:0,behavior:'auto'});
+}
+function enterProject(){
+  if(window.location.hash!=='#project')history.pushState({page:'project'},'','#project');
+  syncLandingRoute();
+}
+window.addEventListener('popstate',syncLandingRoute);
+syncLandingRoute();
+</script>
+</body></html>
